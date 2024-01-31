@@ -1,6 +1,6 @@
 
 
-export type DataT = {
+export type PortfolioT = {
   id: string
   name: string
   desc: string
@@ -16,4 +16,10 @@ export type PhotoT = {
   url: string
   title: string
   photoDesc: string
+}
+
+export type RootStackParamListT = {
+  Accueil : undefined,
+  Profile : { portfolio : PortfolioT }
+  Faq : undefined
 }

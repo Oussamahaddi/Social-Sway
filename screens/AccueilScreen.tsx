@@ -1,23 +1,27 @@
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { DataT } from '../types/Types';
+import { PortfolioT } from '../types/Types';
 import { DATA } from '../data/usersData';
+import { useNavigation } from '@react-navigation/native';
 
 export default function AccueilScreen() {
 
-  const data : DataT[] = DATA
+  const data : PortfolioT[] = DATA
+  const Navigation = useNavigation();
 
   return (
     <ScrollView>
       {
-        data.map((post, index) => (
-          <View key={index} style={styles.postContainer}>
-            <Image style={styles.img} source={{uri : post.img}}/>
-            <View style={styles.postInfo}>
-              <Text>{post.country}</Text>
-              <Text>{post.photos.length}</Text>
+        data.map((portfolio, index) => (
+          <Pressable key={index} onPress={() => Navigation.navigate('Profile', {portfolio})}>
+            <View style={styles.postContainer}>
+              <Image style={styles.img} source={{uri : portfolio.img}}/>
+              <View style={styles.postInfo}>
+                <Text>{portfolio.country}</Text>
+                <Text>{portfolio.photos.length}</Text>
+              </View>
             </View>
-          </View>
+          </Pressable>
         ))
       }
     </ScrollView>

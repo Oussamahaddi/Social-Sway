@@ -1,32 +1,27 @@
-import { View, Text, Button } from 'react-native'
-import React from 'react'
-import {NavigationContainer} from '@react-navigation/native';
-import AccueilScreen from '../screens/AccueilScreen';
-import FaqScreen from '../screens/FaqScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {NavigationContainer, ParamListBase, RouteProp} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DrawNavigation from './DrawNavigation';
 
-const Tab = createBottomTabNavigator();
+// import AccueilScreen from '../screens/AccueilScreen';
+// import FaqScreen from '../screens/FaqScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+
+import { RootStackParamListT } from '../types/Types';
+
+const Stack = createNativeStackNavigator<RootStackParamListT>();
 
 const Navigation = () => {
+
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{tabBarActiveTintColor : "white", tabBarInactiveTintColor : "white", tabBarStyle : {backgroundColor :"orange"}}}>
-        <Tab.Screen
-          name="testone" 
-          component={DrawNavigation}
-          options={{
-            headerShown : false,
-            headerRight : () => (
-              <Button onPress={() => alert("dada")} title='info' />
-            )
-          }}
+      <Stack.Navigator initialRouteName='Accueil' screenOptions={{statusBarColor: 'black',headerTintColor : "white", headerStyle: {backgroundColor: 'orange'}}}>
+        <Stack.Screen name='Accueil' component={DrawNavigation} options={{headerShown : false}} />
+        <Stack.Screen 
+          name='Profile' 
+          component={ProfileScreen}
+          options={({route} : {route : RouteProp<RootStackParamListT, "Profile">}) => ({title : `Portfolio de ${route.params.portfolio.name}`, headerShadowVisible: false})}
         />
-        <Tab.Screen
-          name="testtwo" 
-          component={FaqScreen}
-        />
-      </Tab.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
