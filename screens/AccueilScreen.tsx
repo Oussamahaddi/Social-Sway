@@ -1,9 +1,12 @@
-import { ScrollView, Pressable } from 'react-native'
+import { ScrollView, Pressable, Text } from 'react-native'
 import React from 'react'
-import { PortfolioT, RootStackParamListT } from '../types/Types';
-import { DATA } from '../data/usersData';
+import {  RootStackParamListT } from '../types/Types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import PortfolioComponent from '../components/PortfolioComponent';
+import ModalComponent from '../components/ModalComponent';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { hideModal, showModal } from '../redux/action';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props {
   navigation : NativeStackNavigationProp<RootStackParamListT>
@@ -11,7 +14,8 @@ interface Props {
 
 const AccueilScreen : React.FC<Props> = ({navigation}) => {
 
-  const data : PortfolioT[] = DATA
+  const dispatch = useAppDispatch()
+  const data = useAppSelector((state) => state.data)
 
   return (
     <ScrollView>
@@ -22,6 +26,7 @@ const AccueilScreen : React.FC<Props> = ({navigation}) => {
           </Pressable>
         ))
       }
+      <ModalComponent/>
     </ScrollView>
   )
 }

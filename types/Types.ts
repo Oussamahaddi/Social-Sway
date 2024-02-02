@@ -31,4 +31,17 @@ export type RootStackParamListT = {
   Faq : undefined
   Favorie : undefined
   SinglePost : { post : PostT }
+  Setting : undefined
 }
+
+export type InitialStateT = {
+  data : PortfolioT[]
+  modalVisible : boolean
+}
+
+export type ActionType<T, P> = {
+  type : T
+  payload : P
+}
+
+export type ActionTypesT = ActionType<"SHOW_MODAL" | "HIDE_MODAL", undefined>
