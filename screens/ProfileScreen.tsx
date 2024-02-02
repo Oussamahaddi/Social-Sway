@@ -3,10 +3,11 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { RootStackParamListT } from '../types/Types'
 import { NavigationProp, RouteProp } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 interface Props {
   route : RouteProp<RootStackParamListT, "Profile">,
-  navigation : NavigationProp<ReactNavigation.RootParamList>
+  navigation : NativeStackNavigationProp<RootStackParamListT>
 }
 
 const ProfileScreen : React.FC<Props> = ({route, navigation}) => {
@@ -15,8 +16,10 @@ const ProfileScreen : React.FC<Props> = ({route, navigation}) => {
 
   return (
     <ScrollView>
-      <View style={styles.header}>
-        <Image style={styles.img} source={{uri : portfolio.img}}/>
+      <View style={[styles.header, {backgroundColor: portfolio.favColor}]}>
+        <View style={styles.img}>
+          <Image style={{width: '100%', aspectRatio: 1, borderRadius: 100}} source={{uri : portfolio.img}}/>
+        </View>
       </View>
       <View style={styles.bioContainer}>
         <Text style={styles.bio}>Bio</Text>
@@ -42,7 +45,6 @@ const styles = StyleSheet.create({
     alignItems : 'center',
     justifyContent : 'center',
     height : 300,
-    backgroundColor : 'orange'
   },
   img : {
     width : 200,

@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Button, Pressable } from 'react-native'
 import React from 'react'
 import AccueilScreen from '../screens/AccueilScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -18,7 +18,11 @@ const DrawNavigation = () => {
           drawerIcon : ({focused, size, color}) => (
             <Icon name="home-sharp" size={size} color={color}/>
           ),
-          title : 'Accueil'
+          headerRight : () => (
+            <Pressable onPress={() => alert('ddd')}>
+              <Icon name='settings' color='white' size={22} style={{marginRight: 20}} />
+            </Pressable>
+          )
         }}
       />
       <Drawer.Screen 

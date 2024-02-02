@@ -1,10 +1,15 @@
 import { View, Text, Image, StyleSheet, ScrollView, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { PortfolioT } from '../types/Types';
+import { PortfolioT, RootStackParamListT } from '../types/Types';
 import { DATA } from '../data/usersData';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-export default function AccueilScreen({navigation} : {navigation: NavigationProp<ReactNavigation.RootParamList>}) {
+interface Props {
+  navigation : NativeStackNavigationProp<RootStackParamListT>
+}
+
+const AccueilScreen : React.FC<Props> = ({navigation}) => {
 
   const data : PortfolioT[] = DATA
 
@@ -47,3 +52,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   }
 })
+
+export default AccueilScreen
