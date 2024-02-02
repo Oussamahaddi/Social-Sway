@@ -1,17 +1,13 @@
-import {NavigationContainer, ParamListBase, RouteProp} from '@react-navigation/native';
+import {NavigationContainer, RouteProp} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DrawNavigation from './DrawNavigation';
-
-// import AccueilScreen from '../screens/AccueilScreen';
-// import FaqScreen from '../screens/FaqScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-
-import { RootStackParamListT } from '../types/Types';
-import TabNavigation from './TabNavigation';
-import SinglePost from '../screens/SinglePost';
 import { Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { useState } from 'react';
+import { RootStackParamListT } from '../types/Types';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import TabNavigation from './TabNavigation';
+import ProfileScreen from '../screens/ProfileScreen';
+import SinglePost from '../screens/SinglePost';
 
 const Stack = createNativeStackNavigator<RootStackParamListT>();
 
