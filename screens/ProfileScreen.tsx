@@ -1,14 +1,15 @@
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Image, Pressable } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { RootStackParamListT } from '../types/Types'
-import { RouteProp } from '@react-navigation/native'
+import { NavigationProp, RouteProp } from '@react-navigation/native'
 
 interface Props {
-  route : RouteProp<RootStackParamListT, "Profile">
+  route : RouteProp<RootStackParamListT, "Profile">,
+  navigation : NavigationProp<ReactNavigation.RootParamList>
 }
 
-const ProfileScreen : React.FC<Props> = ({route}) => {
+const ProfileScreen : React.FC<Props> = ({route, navigation}) => {
 
   const portfolio = route.params.portfolio;
 
@@ -23,11 +24,11 @@ const ProfileScreen : React.FC<Props> = ({route}) => {
       </View>
       <View style={styles.photoContainer}>
         {
-          portfolio.photos.map((pic, index) => (
-            <View key={index}>
-              <Image style={{width: '100%', aspectRatio : 1}} source={{uri : pic.url}}/>
-              <Text style={styles.photoTitle}>{pic.title}</Text>
-            </View>
+          portfolio.photos.map((post, index) => (
+            <Pressable key={index} onPress={() => navigation.navigate('SinglePost', {post})}>
+              <Image style={{width: '100%', aspectRatio : 1}} source={{uri : post.url}}/>
+              <Text style={styles.photoTitle}>{post.title}</Text>
+            </Pressable>
           ))
         }
       </View>

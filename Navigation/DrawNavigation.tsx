@@ -12,12 +12,13 @@ const DrawNavigation = () => {
   return (
     <Drawer.Navigator screenOptions={{headerTintColor : "white", headerStyle : {backgroundColor : "orange"}}}>
       <Drawer.Screen 
-        name='Accueil' 
+        name='Accueil'
         component={AccueilScreen}
         options={{
           drawerIcon : ({focused, size, color}) => (
             <Icon name="home-sharp" size={size} color={color}/>
-          )
+          ),
+          title : 'Accueil'
         }}
       />
       <Drawer.Screen 

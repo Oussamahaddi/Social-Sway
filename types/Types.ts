@@ -18,8 +18,17 @@ export type PhotoT = {
   photoDesc: string
 }
 
+export type PostT = {
+  id: number
+  url: string
+  title: string
+  photoDesc : string
+}
+
 export type RootStackParamListT = {
-  Accueil : undefined,
+  Home : undefined
   Profile : { portfolio : PortfolioT }
   Faq : undefined
+  Favorie : undefined
+  SinglePost : { post : PostT }
 }

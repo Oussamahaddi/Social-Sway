@@ -7,6 +7,8 @@ import DrawNavigation from './DrawNavigation';
 import ProfileScreen from '../screens/ProfileScreen';
 
 import { RootStackParamListT } from '../types/Types';
+import TabNavigation from './TabNavigation';
+import SinglePost from '../screens/SinglePost';
 
 const Stack = createNativeStackNavigator<RootStackParamListT>();
 
@@ -14,12 +16,17 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Accueil' screenOptions={{statusBarColor: 'black',headerTintColor : "white", headerStyle: {backgroundColor: 'orange'}}}>
-        <Stack.Screen name='Accueil' component={DrawNavigation} options={{headerShown : false}} />
+      <Stack.Navigator initialRouteName='Home' screenOptions={{statusBarColor: 'black',headerTintColor : "white", headerStyle: {backgroundColor: 'orange'}}}>
+        <Stack.Screen name='Home' component={TabNavigation} options={{headerShown : false}} />
         <Stack.Screen 
           name='Profile' 
           component={ProfileScreen}
           options={({route} : {route : RouteProp<RootStackParamListT, "Profile">}) => ({title : `Portfolio de ${route.params.portfolio.name}`, headerShadowVisible: false})}
+        />
+        <Stack.Screen 
+          name='SinglePost' 
+          component={SinglePost}
+          options={({route} : {route : RouteProp<RootStackParamListT, "SinglePost">}) => ({title : `${route.params.post.title}`})}
         />
       </Stack.Navigator>
     </NavigationContainer>
