@@ -36,7 +36,9 @@ export type RootStackParamListT = {
 
 export type InitialStateT = {
   data : PortfolioT[]
-  modalVisible : boolean
+  settingModalVisible : boolean
+  likeModalVisible : boolean
+  listPortfolioLiked : PortfolioT[]
 }
 
 export type ActionType<T, P> = {
@@ -44,4 +46,5 @@ export type ActionType<T, P> = {
   payload : P
 }
 
-export type ActionTypesT = ActionType<"SHOW_MODAL" | "HIDE_MODAL", undefined>
+export type ActionTypesT = ActionType<"SHOW_MODAL" | "HIDE_MODAL", undefined> 
+  | ActionType<"LIKE" | 'DISLIKE', PortfolioT>

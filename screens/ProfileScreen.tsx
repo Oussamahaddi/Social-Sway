@@ -1,8 +1,7 @@
-import { View, Text, ScrollView, StyleSheet, Image, Pressable } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Image, Pressable, Dimensions } from 'react-native'
 import React from 'react'
-import Icon from 'react-native-vector-icons/Ionicons'
 import { RootStackParamListT } from '../types/Types'
-import { NavigationProp, RouteProp } from '@react-navigation/native'
+import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 interface Props {
@@ -27,7 +26,7 @@ const ProfileScreen : React.FC<Props> = ({route, navigation}) => {
       </View>
       <View style={styles.photoContainer}>
         {
-          portfolio.photos.map((post, index) => (
+          portfolio && portfolio.photos.map((post, index) => (
             <Pressable key={index} onPress={() => navigation.navigate('SinglePost', {post})}>
               <Image style={{width: '100%', aspectRatio : 1}} source={{uri : post.url}}/>
               <Text style={styles.photoTitle}>{post.title}</Text>
@@ -83,7 +82,24 @@ const styles = StyleSheet.create({
     padding : 10,
     color : 'white',
     fontWeight: '600',
-  }
+  },
+  backDrop : {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "#232f34",
+    opacity: 0.32
+  },
+  alertBox: {
+    maxWidth: 300,
+    height : 200,
+    backgroundColor: 'white',
+    margin: 48,
+    elevation: 24,
+    borderRadius: 2,
+  },
 })
 
 export default ProfileScreen

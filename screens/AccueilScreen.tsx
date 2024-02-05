@@ -7,6 +7,7 @@ import ModalComponent from '../components/ModalComponent';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { hideModal, showModal } from '../redux/action';
 import Icon from 'react-native-vector-icons/Ionicons';
+import SettingComponent from '../components/SettingComponent';
 
 interface Props {
   navigation : NativeStackNavigationProp<RootStackParamListT>
@@ -14,19 +15,20 @@ interface Props {
 
 const AccueilScreen : React.FC<Props> = ({navigation}) => {
 
-  const dispatch = useAppDispatch()
-  const data = useAppSelector((state) => state.data)
+  const {settingModalVisible, data} = useAppSelector((state) => state);
 
   return (
     <ScrollView>
       {
-        data.map((portfolio, index) => (
+        data && data.map((portfolio, index) => (
           <Pressable key={index} onPress={() => navigation.navigate('Profile', {portfolio})}>
             <PortfolioComponent portfolio={portfolio} />
           </Pressable>
         ))
       }
-      <ModalComponent/>
+      <ModalComponent transparent={false} modalVisible={settingModalVisible}>
+        <SettingComponent />
+      </ModalComponent>
     </ScrollView>
   )
 }

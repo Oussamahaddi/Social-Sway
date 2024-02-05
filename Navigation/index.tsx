@@ -1,19 +1,20 @@
 import {NavigationContainer, RouteProp} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Pressable } from 'react-native';
-import { useState } from 'react';
 import { RootStackParamListT } from '../types/Types';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import TabNavigation from './TabNavigation';
 import ProfileScreen from '../screens/ProfileScreen';
 import SinglePost from '../screens/SinglePost';
+import { useAppSelector } from '../hooks';
+import LikedAlert from '../components/LikedAlert';
+import { DISLIKE, LIKE } from '../redux/type';
+import { dislikePortolio, likePortfolio } from '../redux/action';
 
 const Stack = createNativeStackNavigator<RootStackParamListT>();
 
 const Navigation = () => {
 
-  const [like, setLike] = useState<boolean>(true);
+  const {listPortfolioLiked} = useAppSelector((state) => state);
 
   return (
     <NavigationContainer>
@@ -31,9 +32,9 @@ const Navigation = () => {
             headerShadowVisible: false, 
             headerStyle : {backgroundColor : route.params.portfolio.favColor},
             headerRight : () => (
-              <Pressable onPress={() => setLike(!like)}>
-                <Icon name={like ? 'heart' : 'trash'} color='white' size={26} style={{marginRight: 10}} />
-              </Pressable>
+              listPortfolioLiked.includes(route.params.portfolio) ? 
+              <LikedAlert title='Photos removed' description='wa2 wa2 wa2' icon='trash' dispatchMethod={dislikePortolio(route.params.portfolio)} /> :
+              <LikedAlert title='Photos enregitrees' description='Elles sont disponibles dans votre selection' icon='heart' dispatchMethod={likePortfolio(route.params.portfolio)} />
             )
           })}
         />
